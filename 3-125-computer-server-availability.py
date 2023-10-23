@@ -1,5 +1,7 @@
 import threading
 import subprocess
+import platform
+
 
 # List of Oracle servers located at data-pc.. systems in 3.125.
 computers = ["data-pc01.adeis.uow.edu.au",
@@ -35,7 +37,17 @@ computers = ["data-pc01.adeis.uow.edu.au",
 
 def ping_computer(computer):
     """Ping a computer and print if it is online or offline"""
-    if subprocess.call(["ping", "-n", "2", computer],
+
+    if platform.system() == "Windows":
+        # Windows ping command
+        ping = ["ping", "-n", "2", computer]
+    elif platform.system() == "Linux":
+        # Linux ping command
+        ping = ["ping", "-c", "2", computer]
+    else:
+        raise Exception("Unknown operating system")
+
+    if subprocess.call(ping,
                        stdout=subprocess.DEVNULL,
                        stderr=subprocess.DEVNULL) == 0:
         print(f"{computer} is online")
