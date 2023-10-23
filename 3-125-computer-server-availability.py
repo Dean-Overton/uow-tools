@@ -59,12 +59,21 @@ class OracleServerAvailability:
             print(f"{computer} is offline")
 
     def _check_vpn(self):
-        # TODO: Check if VPN is connected to the UOW network
         print("Checking VPN connection...")
+        ping = ["ping", "-n", "2", "10.1.1.241"]
+        if subprocess.call(ping,
+                           stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL) == 0:
+            return True
+        else:
+            raise Exception("Not connected to UOW VPN!")
 
     def get_availability(self):
         """Get the availability of all computers"""
         # Create a thread for each computer ping and start it
+        if not self._check_vpn():
+            return
+
         threads = []
         for computer in self.computers:
             thread = threading.Thread(target=self._ping_computer,
