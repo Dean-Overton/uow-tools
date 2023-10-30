@@ -22,3 +22,12 @@ This tool helps you generate Anki flashcards from your lecture slides. It will t
 4) Insert a OpenAI API key.
 5) Select the folder containing your lecture slides.
 6) Enter the name of the deck you want to create.
+
+## Lecture Slide Rewrite Generator (GUI)
+
+This tool helps you rewrite your lecture slides. It will take a folder of lecture slides and generate a new text file of easy to read notes. The notes will be saved in a folder called "notes" in the same directory as the script.
+
+### Usage
+1) Install [latest](https://www.python.org/downloads/) python.
+2) Run it: ```python lecture-slide-rewrite-generator-gui.py```
+3) Insert a OpenAI API key.
