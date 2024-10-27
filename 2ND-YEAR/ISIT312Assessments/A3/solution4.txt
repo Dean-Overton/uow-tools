@@ -1,0 +1,224 @@
+>>> from pyspark.sql.types import *
+>>> account_schema = StructType([
+... 	StructField("bank_name", StringType(), True),
+... 	StructField("account_number", StringType(), True),
+... 	StructField("balance", DoubleType(), True),
+... 	StructField("account_type", StringType(), True)
+... ])
+>>> transaction_schema = StructType([
+... 	StructField("bank_name", StringType(), True),
+... 	StructField("account_number", StringType(), True),
+... 	StructField("date_time", TimestampType(), True),
+... 	StructField("amount", DoubleType(), True),
+... 	StructField("transaction_type", StringType(), True)
+... ])
+>>> bank_schema = StructType([
+... 	StructField("name", StringType(), True),
+... 	StructField("hq_country", StringType(), True),
+... 	StructField("hq_city", StringType(), True),
+... 	StructField("hq_street", StringType(), True),
+... 	StructField("hq_building_number", IntegerType(), True),
+... 	StructField("web_site", StringType(), True),
+... 	StructField("email", StringType(), True),
+... 	StructField("bank_type", StringType(), True)
+... ])
+>>> account = spark.read.format("csv").schema(account_schema).load("account.csv")
+>>> account.show()
++----------+--------------------+-------+------------+                     	 
+| bank_name|  	account_number|balance|account_type|
++----------+--------------------+-------+------------+
+|0123456788|China Constructio...|12334.0| 	savings|
+|0123456789|China Constructio...| 823.67| 	savings|
+|4123456788|National Australi...|  223.6| 	savings|
+|0123456779|National Australi...|  222.2| 	savings|
+|9123456689| National China Bank|  379.4| 	savings|
+|1123455701| National China Bank| 633.01| 	savings|
+|2123356710| National China Bank| 999.67| 	savings|
+|5122456739|China Constructio...|  521.2| 	savings|
+|0313345681|China Constructio...| 220.37| 	savings|
+|0593456725|China Constructio...| 125.69| 	savings|
+|0963456721|China Merchants Bank| 323.57|    	loan|
+|2123453713|China Merchants Bank| 163.97|    	loan|
+|1153456711|China Merchants Bank| 193.11|    	loan|
+|9123456786|China Industrial ...| 129.25|	checking|
+|1193456783|China Industrial ...| 923.55|	checking|
+|0623456781|China Industrial ...| 553.37|	checking|
+|5023456739|City Bank of New ...| 884.64|    	loan|
+|1123456789|City Bank of New ...| 999.52|    	loan|
+|0823426784|City Bank of New ...| 189.33|    	loan|
+|0123356784|  National Fuji Bank|  177.6| 	savings|
++----------+--------------------+-------+------------+
+only showing top 20 rows
+
+
+>>> account_schema = StructType([
+... 	StructField("account_number", StringType(), True),
+... 	StructField("bank_name", StringType(), True),
+... 	StructField("balance", DoubleType(), True),
+... 	StructField("account_type", StringType(), True)
+... ])
+>>>
+>>> account_schema = StructType([
+... 	StructField("account_number", StringType(), True),
+... 	StructField("bank_name", StringType(), True),
+... 	StructField("balance", DoubleType(), True),
+... 	StructField("account_type", StringType(), True)
+... ])
+>>> bank_schema = StructType([
+... 	StructField("name", StringType(), True),
+... 	StructField("hq_country", StringType(), True),
+... 	StructField("hq_city", StringType(), True),
+... 	StructField("hq_street", StringType(), True),
+... 	StructField("hq_building_number", IntegerType(), True),
+... 	StructField("web_site", StringType(), True),
+... 	StructField("email", StringType(), True),
+... 	StructField("bank_type", StringType(), True)
+... ])
+>>> bank_schema = StructType([
+... 	StructField("name", StringType(), True),
+... 	StructField("hq_country", StringType(), True),
+... 	StructField("hq_city", StringType(), True),
+... 	StructField("hq_street", StringType(), True),
+... 	StructField("hq_building_number", IntegerType(), True),
+... 	StructField("web_site", StringType(), True),
+... 	StructField("email", StringType(), True),
+... 	StructField("bank_type", StringType(), True)
+... ])
+>>> account = spark.read.format("csv").schema(account_schema).load("account.csv")
+>>> account.count()
+43
+>>> transaction = spark.read.format("csv").schema(transaction_schema).load("transaction.csv")
+>>> transaction.count()
+88
+>>> bank = spark.read.format("csv").schema(bank_schema).load("bank.csv")
+>>> bank.count()
+21
+>>> account.show()
++--------------+--------------------+-------+------------+
+|account_number|       	bank_name|balance|account_type|
++--------------+--------------------+-------+------------+
+|	0123456788|China Constructio...|12334.0| 	savings|
+|	0123456789|China Constructio...| 823.67| 	savings|
+|	4123456788|National Australi...|  223.6| 	savings|
+|	0123456779|National Australi...|  222.2| 	savings|
+|	9123456689| National China Bank|  379.4| 	savings|
+|	1123455701| National China Bank| 633.01| 	savings|
+|	2123356710| National China Bank| 999.67| 	savings|
+|	5122456739|China Constructio...|  521.2| 	savings|
+|	0313345681|China Constructio...| 220.37| 	savings|
+|	0593456725|China Constructio...| 125.69| 	savings|
+|	0963456721|China Merchants Bank| 323.57|    	loan|
+|	2123453713|China Merchants Bank| 163.97|    	loan|
+|	1153456711|China Merchants Bank| 193.11|    	loan|
+|	9123456786|China Industrial ...| 129.25|	checking|
+|	1193456783|China Industrial ...| 923.55|	checking|
+|	0623456781|China Industrial ...| 553.37|	checking|
+|	5023456739|City Bank of New ...| 884.64|    	loan|
+|	1123456789|City Bank of New ...| 999.52|    	loan|
+|	0823426784|City Bank of New ...| 189.33|    	loan|
+|	0123356784|  National Fuji Bank|  177.6| 	savings|
++--------------+--------------------+-------+------------+
+only showing top 20 rows
+>>> transaction.show()
++--------------+--------------------+-------------------+-------+----------------+
+|account_number|           bank_name|          date_time| amount|transaction_type|
++--------------+--------------------+-------------------+-------+----------------+
+|    3323456721|National Royal Ba...|2021-01-20 12:44:09|  100.0|         deposit|
+|    3323456721|National Royal Ba...|2021-01-10 11:44:00|  150.0|      withdrawal|
+|    2523456752|National Royal Ba...|2020-03-23 10:44:07| 1000.0|         deposit|
+|    3323456721|National Royal Ba...|2021-01-20 10:25:00|  100.0|         deposit|
+|    3323456721|National Royal Ba...|2021-01-10 10:25:00|  150.0|      withdrawal|
+|    2523456752|National Royal Ba...|2020-03-23 10:25:00| 1000.0|        deposit |
+|    2523456752|National Royal Ba...|2020-07-10 10:25:00|  500.0|      withdrawal|
+|    6223456740|National Royal Ba...|2021-01-01 10:25:00|  600.0|         deposit|
+|    6223456740|National Royal Ba...|2021-01-10 10:25:00|  700.0|         deposit|
+|    1123456712|National Westmins...|2020-01-01 10:25:00|12000.0|         deposit|
+|    1123456712|National Westmins...|2021-01-10 10:25:00| 1000.0|      withdrawal|
+|    4123456730|National Banco do...|2019-03-08 10:25:00| 4000.0|         deposit|
+|    4123456730|National Banco do...|2021-01-15 10:25:00| 1000.0|      withdrawal|
+|    7223456719|National Swiss  B...|2019-06-01 10:25:00| 4000.0|         deposit|
+|    7223456719|National Swiss  B...|2020-06-15 10:25:00| 3000.0|      withdrawal|
+|    7823456713|National Swiss  B...|2019-02-09 10:25:00| 4000.0|         deposit|
+|    7823456713|National Swiss  B...|2020-02-09 10:25:00| 4000.0|      withdrawal|
+|    3623456728| National Daiwa Bank|2020-02-15 10:25:00| 6000.0|         deposit|
+|    3623456728| National Daiwa Bank|2021-01-09 10:25:00|  200.0|     withdrawal |
+|    2523456757| National Tokai Bank|2018-09-15 10:25:00| 6000.0|         deposit|
++--------------+--------------------+-------------------+-------+----------------+
+only showing top 20 rows
+>>> bank.show()
++--------------------+-----------+---------+-------------------+------------------+--------------------+--------------------+------------+
+|                name| hq_country|  hq_city|          hq_street|hq_building_number|             website|               email|   bank_type|
++--------------------+-----------+---------+-------------------+------------------+--------------------+--------------------+------------+
+|National Australi...|  Australia|   Sydney|      Fitzwater St.|                25|      www.nab.com.au|      nab@nab.com.au|  commercial|
+| National China Bank|      China|Zhongshan|          Beiyuanlu|                17|      www.ncb.boc.cn|139@back of China...|     central|
+|National China Co...|      China|Guangzhou|           Baiyulu.|                30|www.construction....|js@construction-b...|construction|
+|China Merchants Bank|      China| Dongguan|Tangxia Huayuan St.|                10|www.merchant.dong.cn|    zs@ellechina.com|  investment|
+|China Industrial ...|      China| Shanghai|         Pudong St.|                 2|www.bank-industri...|         cib@.com.cn|  commercial|
+|City Bank of New ...|        USA| New York|            125 St.|                 3|    www.citybank.com|citybank@newyork....|  commercial|
+|  National Fuji Bank|      Japan|    Tokyo|       Harabura St.|                25|     www.fuji.com.jp|    hara@fuji.com.jp|  commercial|
+|National AK Bars ...|     Russia|   Moscow|      Tverskaya St.|                 9|   www.ak.com.russia|    ak@ak.com.russia|  investment|
+| National Royal Bank|        USA|  Chicago|          118th St.|                25|       www.royal.com|royal@royal back....|  industrial|
+|Agricultural Bank...|      China| Changsha|       Changsha Lu.|                10|       www.ab.com.cn|agriculturalback@...|  commercial|
+|National American...|        USA|   Hawaii|        Kuakini St.|                96|  www.saving.com.usa|   savingbank@hw.com|  commercial|
+|National Banco BP...|      Italy|    Milan|        Sforza Ave.|                16|        www.bmp.com.|         bmp@bmp.com|  commercial|
+|   National Bank BPS|     Poland|   Warsaw|       Opolskie St.|                19|      www.bps.com.pl|         bps@bps.com|  commercial|
+|National Bank of ...|      Japan|    Osaka|          Shiba St.|                33|      www.ufj.com.jp|      ufj@ufj.com.jp|  commercial|
+| National Tokai Bank|      Japan|  Hikkaid|         Kyouto St.|                25|  www.hikkaid.com.jp|   hikkaid@ky.com.jp|     central|
+| National Daiwa Bank|      Japan|     Amri|       Kanagawa St.|                25|     www.amri.com.jp|   hikki@amri.com.jp|  commercial|
+|National Swiss  B...|Switzerland|   Geneva|  www.swiss.com.ch.|               161|    www.swiss.com.ch|     gz@swiss.com.ch|  industrial|
+|National Banco do...|     Brasil| Brasilia|   Avenida Paulista|                 2|       www.bb.com.br|     bb@banco.com.br|  commercial|
+|National Westmins...|         UK|   London|         Regent St.|                25|  www.natwest.com.uk|natwest@natwest.c...|  commercial|
+|National Royal Ba...|     Canada|   Ottawa|         Albert St.|                 9|www.rbroyalbank.c...|royalbank@royalba...|     central|
++--------------------+-----------+---------+-------------------+------------------+--------------------+--------------------+------------+
+only showing top 20 rows
+>>> bank_total_deposits = transaction.filter(col("transaction_type") == "deposit").groupBy("bank_name").agg(sum("amount").alias("total_deposits")).orderBy("total_deposits")
+>>> bank_total_deposits.show()
++--------------------+--------------+                                           
+|           bank_name|total_deposits|
++--------------------+--------------+
+|National Royal Ba...|        2500.0|
+|   National Bank BPS|        4000.0|
+|National Banco BP...|        4000.0|
+|National Banco do...|        4000.0|
+| National Daiwa Bank|        6000.0|
+| National Tokai Bank|        6000.0|
+|National Swiss  B...|        8000.0|
+|National Westmins...|       12000.0|
+|Agricultural Bank...|       15000.0|
+|National Bank of ...|       16000.0|
+| National Royal Bank|       25000.0|
+|China Merchants Bank|       30000.0|
+|National AK Bars ...|       30000.0|
+|  National Fuji Bank|       52000.0|
+|China Industrial ...|       60000.0|
+|City Bank of New ...|       85000.0|
++--------------------+--------------+
+>>> transaction.createOrReplaceTempView("transactionsView")
+>>> bank_total_deposits_sql_query = spark.sql("""
+... SELECT bank_name, SUM(amount) as total_deposits
+... FROM transactionsView
+... WHERE transaction_type == 'deposit'
+... GROUP BY bank_name
+... ORDER BY total_deposits ASC""")
+>>> bank_total_deposits_sql_query.show()
++--------------------+--------------+                                           
+|           bank_name|total_deposits|
++--------------------+--------------+
+|National Royal Ba...|        2500.0|
+|   National Bank BPS|        4000.0|
+|National Banco BP...|        4000.0|
+|National Banco do...|        4000.0|
+| National Daiwa Bank|        6000.0|
+| National Tokai Bank|        6000.0|
+|National Swiss  B...|        8000.0|
+|National Westmins...|       12000.0|
+|Agricultural Bank...|       15000.0|
+|National Bank of ...|       16000.0|
+| National Royal Bank|       25000.0|
+|China Merchants Bank|       30000.0|
+|National AK Bars ...|       30000.0|
+|  National Fuji Bank|       52000.0|
+|China Industrial ...|       60000.0|
+|City Bank of New ...|       85000.0|
++--------------------+--------------+
+

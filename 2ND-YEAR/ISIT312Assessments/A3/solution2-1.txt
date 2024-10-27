@@ -1,0 +1,135 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+create 'job-applicants', 'APPLICANT', 'EMPLOYER', 'POSITION', 'APPLICATION';
+
+put 'job-applicants', 'APPLICANT|1', 'APPLICANT:full-name', 'Phil Overton'
+0 row(s) in 4.6820 seconds
+
+0 row(s) in 0.1610 seconds
+
+put 'job-applicants', 'APPLICANT|1', 'APPLICANT:date-of-birth', '1990-05-15'
+0 row(s) in 0.0430 seconds
+
+
+put 'job-applicants', 'APPLICANT|2', 'APPLICANT:full-name', 'Dean Overton'
+0 row(s) in 0.0040 seconds
+
+put 'job-applicants', 'APPLICANT|2', 'APPLICANT:date-of-birth', '1988-10-22'
+0 row(s) in 0.0110 seconds
+
+
+put 'job-applicants', 'EMPLOYER|UOW', 'EMPLOYER:phone', '62-4221-3218'
+0 row(s) in 0.0040 seconds
+
+put 'job-applicants', 'EMPLOYER|ANU', 'EMPLOYER:phone', '62-4221-3213'
+0 row(s) in 0.0050 seconds
+
+
+put 'job-applicants', 'POSITION|1', 'POSITION:title', 'Software Engineer'
+0 row(s) in 0.0050 seconds
+
+put 'job-applicants', 'POSITION|1', 'POSITION:salary', '79000'
+0 row(s) in 0.0060 seconds
+
+put 'job-applicants', 'POSITION|2', 'POSITION:title', 'Senior Software Engineer'
+0 row(s) in 0.0060 seconds
+
+put 'job-applicants', 'POSITION|2', 'POSITION:salary', '110000'
+0 row(s) in 0.0060 seconds
+
+
+put 'job-applicants', 'APPLICATION|1|applicant_number|position_number|employer_name', 'APPLICATION:total_skills', '3'
+0 row(s) in 0.0360 seconds
+
+
+put 'job-applicants', 'APPLICATION|1|1|1|UOW', 'APPLICATION:total_skills', '3'
+0 row(s) in 0.0070 seconds
+
+put 'job-applicants', 'APPLICATION|1|1|1|UOW', 'APPLICATION:education-level', 'Bachelors' 
+0 row(s) in 0.0060 seconds
+
+put 'job-applicants', 'APPLICATION|1|2|2|ANU', 'APPLICATION:total_skills', '5'
+0 row(s) in 0.0030 seconds
+
+put 'job-applicants', 'APPLICATION|1|2|2|ANU', 'APPLICATION:education-level', 'Masters'
+0 row(s) in 0.0040 seconds
+
+
+put 'job-applicants', 'APPLICATION|1|1|2|ANU', 'APPLICATION:total_skills', '3'
+0 row(s) in 0.0040 seconds
+
+put 'job-applicants', 'APPLICATION|1|1|2|ANU', 'APPLICATION:education-level', 'Bachelors'
+0 row(s) in 0.0040 seconds
+
+bigdata@bigdata-VirtualBox:~/Desktop/a3$ cls
+No command 'cls' found, but there are 18 similar ones
+cls: command not found
+bigdata@bigdata-VirtualBox:~/Desktop/a3$ clear
+
+bigdata@bigdata-VirtualBox:~/Desktop/a3$ cat solution2-1.txt
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+create 'job-applicants', 'APPLICANT', 'EMPLOYER', 'POSITION', 'APPLICATION';
+
+put 'job-applicants', 'APPLICANT|1', 'APPLICANT:full-name', 'Phil Overton'
+0 row(s) in 4.6820 seconds
+
+0 row(s) in 0.1610 seconds
+
+put 'job-applicants', 'APPLICANT|1', 'APPLICANT:date-of-birth', '1990-05-15'
+0 row(s) in 0.0430 seconds
+
+
+put 'job-applicants', 'APPLICANT|2', 'APPLICANT:full-name', 'Dean Overton'
+0 row(s) in 0.0040 seconds
+
+put 'job-applicants', 'APPLICANT|2', 'APPLICANT:date-of-birth', '1988-10-22'
+0 row(s) in 0.0110 seconds
+
+
+put 'job-applicants', 'EMPLOYER|UOW', 'EMPLOYER:phone', '62-4221-3218'
+0 row(s) in 0.0040 seconds
+
+put 'job-applicants', 'EMPLOYER|ANU', 'EMPLOYER:phone', '62-4221-3213'
+0 row(s) in 0.0050 seconds
+
+
+put 'job-applicants', 'POSITION|1', 'POSITION:title', 'Software Engineer'
+0 row(s) in 0.0050 seconds
+
+put 'job-applicants', 'POSITION|1', 'POSITION:salary', '79000'
+0 row(s) in 0.0060 seconds
+
+put 'job-applicants', 'POSITION|2', 'POSITION:title', 'Senior Software Engineer'
+0 row(s) in 0.0060 seconds
+
+put 'job-applicants', 'POSITION|2', 'POSITION:salary', '110000'
+0 row(s) in 0.0060 seconds
+
+
+put 'job-applicants', 'APPLICATION|1|applicant_number|position_number|employer_name', 'APPLICATION:total_skills', '3'
+0 row(s) in 0.0360 seconds
+
+
+put 'job-applicants', 'APPLICATION|1|1|1|UOW', 'APPLICATION:total_skills', '3'
+0 row(s) in 0.0070 seconds
+
+put 'job-applicants', 'APPLICATION|1|1|1|UOW', 'APPLICATION:education-level', 'Bachelors' 
+0 row(s) in 0.0060 seconds
+
+put 'job-applicants', 'APPLICATION|1|2|2|ANU', 'APPLICATION:total_skills', '5'
+0 row(s) in 0.0030 seconds
+
+put 'job-applicants', 'APPLICATION|1|2|2|ANU', 'APPLICATION:education-level', 'Masters'
+0 row(s) in 0.0040 seconds
+
+
+put 'job-applicants', 'APPLICATION|1|1|2|ANU', 'APPLICATION:total_skills', '3'
+0 row(s) in 0.0040 seconds
+
+put 'job-applicants', 'APPLICATION|1|1|2|ANU', 'APPLICATION:education-level', 'Bachelors'
+0 row(s) in 0.0040 seconds

@@ -1,0 +1,80 @@
+bigdata@bigdata-VirtualBox:~/a1$ cat Myfile1.txt Myfile2.txt
+#!/usr/bin/env python3
+from itertools import groupby
+from operator import itemgetter
+
+import sys
+
+def read_mapper_output(file, separator='\t'):
+	for line in file:
+    	yield line.rstrip().split(separator, 1)
+
+def main(separator='\t'):
+	data = read_mapper_output(sys.stdin, separator=separator)
+	for current_item, group in groupby(data, itemgetter(0)):
+    	try:
+        	total_item_value = sum([float(item_value) for current_item, item_value in group])
+        	print(f"{current_item}\t{total_item_value}")
+    	except ValueError:
+        	pass
+
+if __name__ == "__main__":
+	main()
+
+bigdata@bigdata-VirtualBox:~/a1$ $HADOOP_HOME/sbin/start-all.sh
+bigdata@bigdata-VirtualBox:~/a1$ $HADOOP_HOME/sbin/start-all.sh
+WARNING: Attempting to start all Apache Hadoop daemons as bigdata in 10 seconds.
+WARNING: This is not a recommended production deployment configuration.
+WARNING: Use CTRL-C to abort.
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [bigdata-VirtualBox]
+Starting resourcemanager
+Starting nodemanagers
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -mkdir myfolder1 myfolder2
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -put Myfile1.txt myfolder1
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -put Myfile2.txt myfolder2
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -ls myfolder1 myfolder2
+Found 1 items
+-rw-r--r--   1 bigdata supergroup     	79 2024-08-07 20:38 myfolder1/Myfile1.txt
+Found 1 items
+-rw-r--r--   1 bigdata supergroup     	84 2024-08-07 20:38 myfolder2/Myfile2.txt
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -cat myfolder1/Myfile1.txt myfolder2/Myfile2.txt 
+MyFile
+Dean Matthew Overton 8001765
+Friday 12:30PM
+No
+No
+No
+Saying No 3 times!
+MyFile #2!!
+Dean Matthew Overton 8001765
+Friday 12:30PM
+Hi
+Hi
+Hi
+Saying Hi 3 times!
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -mkdir merged
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -touch merged/merged.txt
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -cp myfolder1/Myfile1.txt merged
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -cp myfolder2/Myfile2.txt merged
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -concat merged/merged.txt merged/Myfile1.txt merged/Myfile2.txt
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -mv merged/merged.txt /
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -rm -r merged
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -cat /merged.txt
+MyFile
+Dean Matthew Overton 8001765
+Friday 12:30PM
+No
+No
+No
+Saying No 3 times!
+MyFile #2!!
+Dean Matthew Overton 8001765
+Friday 12:30PM
+Hi
+Hi
+Hi
+Saying Hi 3 times!
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -copyToLocal /merged.txt /merged.txt
+bigdata@bigdata-VirtualBox:~/a1$ hdfs dfs -rm -r merged.txt myfolder1 myfolder2

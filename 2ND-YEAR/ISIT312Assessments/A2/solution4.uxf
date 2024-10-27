@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>120</y>
+      <w>130</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Employee
+--
+employee# ID1
+full_name  
+plangs[0..n]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>390</y>
+      <w>140</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Projects
+--
+name ID1
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>230</y>
+      <w>120</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-&lt;
+assigned to</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>360</x>
+      <y>330</y>
+      <w>30</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>customelement=
+drawCircle(10,10,10) fg=black bg=white lw=1 lt=- transparency=0
+layer=2
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>310</x>
+      <y>360</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+% contribution
+bg=#dddddd
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>250</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Employment Record
+--
+hire_date
+salary
+superv_employee_#</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

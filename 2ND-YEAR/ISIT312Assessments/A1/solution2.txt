@@ -1,0 +1,40 @@
+bigdata@bigdata-VirtualBox:~/a1$ cat t2.py
+from snakebite.client import Client 
+import os
+
+client = Client('localhost', 9000) 
+
+for x in client.ls(['/user/bigdata']): 
+	print(os.path.basename(x['path']))
+bigdata@bigdata-VirtualBox:~/a1$ python3 t2.py
+merged.txt
+mergeddir
+myfolder1
+myfolder2
+bigdata@bigdata-VirtualBox:~/a1$ cat t2-1.py
+from snakebite.client import Client
+import os
+
+client = Client('localhost', 9000)
+for x in client.ls(['/user/bigdata/myfolder1', '/user/bigdata/myfolder2']): 
+	print(os.path.basename(x['path']))
+bigdata@bigdata-VirtualBox:~/a1$ python3 t2-1.py
+Myfile1.txt
+Myfile2.txt
+bigdata@bigdata-VirtualBox:~/a1$ cat t2-2.py
+From snakebite.client Import Client
+import os
+
+client = Client('localhost', 9000)
+
+file_list = []
+for x in client.ls(['/user/bigdata/myfolder1', '/user/bigdata/myfolder2']):
+	tf x['file_type'] == 'f':
+		file_list.append(x['path'])
+
+for file in client.cat(file_list):
+	for y in file:
+		print(y)
+bigdata@bigdata-VirtualBox:~/a1$ python3 t2-2.py
+b'MyFile\nDean Matthew Overton 8001765\nFriday 12:30PM\nNo\nNo\nNo\nSaying No 3 times!\n' 
+b'MyFile #2!!\nDean Matthew Overton 8001765\nFriday 12:30PM\nHi\nHi\nHi\nSaying Hi 3 times!\n'
