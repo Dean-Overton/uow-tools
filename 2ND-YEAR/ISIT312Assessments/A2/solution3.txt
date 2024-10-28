@@ -1,0 +1,133 @@
+>>>  create table 
+degree ( 
+degree_id INT, 
+name VARCHAR(30), 
+years INT 
+) row format delimited fields terminated by ',' stored as textfile;
+No rows affected (1.45 seconds)
+>>>  
+>>>  load data local inpath '/home/bigdata/Desktop/degrees.tbl' into table degree;
+No rows affected (0.366 seconds)
+>>>  
+>>>  create table 
+school ( 
+school_id INT, 
+name VARCHAR(30), 
+budget DECIMAL(10, 2) 
+) row format delimited fields terminated by ',' stored as textfile;;
+No rows affected (0.225 seconds)
+>>>  
+>>>  LOAD DATA local INPATH '/home/bigdata/Desktop/schools.tbl' INTO TABLE school;
+No rows affected (0.306 seconds)
+>>>  
+>>>  create table 
+student ( 
+student_id INT, 
+snum INT, 
+school_id INT, 
+first_name VARCHAR(30), 
+last_name VARCHAR(30) 
+) row format delimited fields terminated by ',' stored as textfile;;
+No rows affected (0.108 seconds)
+>>>  
+>>>  LOAD DATA local INPATH '/home/bigdata/Desktop/students.tbl' INTO TABLE student;
+No rows affected (0.339 seconds)
+>>>  
+>>>  create table 
+subject ( 
+subject_id INT, 
+code VARCHAR(30), 
+degree_id INT, 
+title VARCHAR(30), 
+credits DECIMAL(3) 
+) row format delimited fields terminated by ',' stored as textfile;;
+No rows affected (0.354 seconds)
+>>>  
+>>>  LOAD DATA local INPATH '/home/bigdata/Desktop/subjects.tbl' INTO TABLE subject;
+No rows affected (0.201 seconds)
+>>>  
+>>>  CREATE TABLE 
+enrolment ( 
+student_id INT, 
+subject_id INT, 
+grade DECIMAL(3), 
+fee DECIMAL(3), 
+day INT, 
+month INT, 
+year INT 
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+No rows affected (0.212 seconds)
+>>>  
+>>>  LOAD DATA local INPATH '/home/bigdata/Desktop/enrolments.tbl' INTO TABLE enrolment;
+No rows affected (0.316 seconds)
+>>>  
+>>>  SELECT 
+* 
+FROM 
+degree;
++-------------------+---------------------------------+---------------+--+
+| degree.degree_id  |           degree.name           | degree.years  |
++-------------------+---------------------------------+---------------+--+
+| 1                 | Bachelor of Computer Science    | 4             |
+| 2                 | Bachelor of Business Administr  | 4             |
+| 3                 | Bachelor of Arts                | 4             |
++-------------------+---------------------------------+---------------+--+
+3 rows selected (0.284 seconds)
+>>>  
+>>>  SELECT 
+* 
+FROM 
+school;
++-------------------+---------------------------------+----------------+--+
+| school.school_id  |           school.name           | school.budget  |
++-------------------+---------------------------------+----------------+--+
+| 1                 | School of Computer Science      | 100000.00      |
+| 2                 | School of Business Administrat  | 100000.00      |
+| 3                 | School of Arts                  | 100000.00      |
+| 4                 | School of Science               | 100000.00      |
+| 5                 | School of Engineering           | 100000.00      |
++-------------------+---------------------------------+----------------+--+
+5 rows selected (0.217 seconds)
+>>>  
+>>>  SELECT 
+* 
+FROM 
+student;
++---------------------+---------------+--------------------+---------------------+--------------------+--+
+| student.student_id  | student.snum  | student.school_id  | student.first_name  | student.last_name  |
++---------------------+---------------+--------------------+---------------------+--------------------+--+
+| 1                   | 1             | 1                  | John                | Doe                |
+| 2                   | 2             | 2                  | Jane                | Doe                |
+| 3                   | 3             | 3                  | Alice               | Doe                |
++---------------------+---------------+--------------------+---------------------+--------------------+--+
+3 rows selected (0.181 seconds)
+>>>  
+>>>  SELECT 
+* 
+FROM 
+subject;
++---------------------+---------------+--------------------+------------------------------+------------------+--+
+| subject.subject_id  | subject.code  | subject.degree_id  |        subject.title         | subject.credits  |
++---------------------+---------------+--------------------+------------------------------+------------------+--+
+| 1                   | CS101         | 1                  | Introduction to CS           | 3                |
+| 2                   | CS102         | 1                  | Data Structures              | 3                |
+| 3                   | CS103         | 1                  | Algorithms                   | 3                |
+| 4                   | CS104         | 1                  | Operating Systems            | 3                |
+| 5                   | CS105         | 1                  | Database Management Systems  | 3                |
++---------------------+---------------+--------------------+------------------------------+------------------+--+
+5 rows selected (0.172 seconds)
+>>>  
+>>>  SELECT 
+* 
+FROM 
+enrolment;
++-----------------------+-----------------------+------------------+----------------+----------------+------------------+-----------------+--+
+| enrolment.student_id  | enrolment.subject_id  | enrolment.grade  | enrolment.fee  | enrolment.day  | enrolment.month  | enrolment.year  |
++-----------------------+-----------------------+------------------+----------------+----------------+------------------+-----------------+--+
+| 1                     | 1                     | 90               | 100            | 1              | 1                | 2020            |
+| 1                     | 2                     | 80               | 100            | 1              | 1                | 2020            |
+| 1                     | 5                     | 50               | 100            | 1              | 1                | 2020            |
+| 1                     | 3                     | 70               | 100            | 1              | 1                | 2020            |
+| 1                     | 4                     | 60               | 100            | 1              | 1                | 2020            |
++-----------------------+-----------------------+------------------+----------------+----------------+------------------+-----------------+--+
+5 rows selected (0.237 seconds)

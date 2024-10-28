@@ -1,0 +1,65 @@
+>>>  CREATE TABLE employment ( 
+employee_number INT, 
+full_name STRING, 
+-- Project record 
+project_name STRING, 
+percentage_contribution DOUBLE, 
+programming_language STRING, 
+-- Employment record 
+hire_date DATE, 
+salary DOUBLE, 
+supervisor_employee_number INT 
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE;
+No rows affected (3.288 seconds)
+>>>  
+>>>  -- Insert sample data into the table
+>>>  -- Employee 1: Assigned to multiple projects, knows multiple programming languages
+>>>  INSERT INTO employment VALUES 
+(1, 'Dean Over a ton', 'DigiWyse', 50.0, 'Python', '2015-06-01', 90000.0, 3), 
+(1, 'Dean Over a ton', 'DeepThought', 100.0, 'Java', '2015-06-01', 90000.0, 3), 
+(1, 'Dean Over a ton', 'DeepThought', 100.0, 'C++', '2015-06-01', 90000.0, 3);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (20.6 seconds)
+>>>  
+>>>  INSERT INTO employment VALUES 
+(2, 'Tanya Fly', 'DigiWyse', 50.0, NULL, '2017-09-10', 85000.0, 1), 
+(2, 'Tanya Fly', 'Whitenight', 100.0, NULL, '2017-09-10', 85000.0, 1);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (25.928 seconds)
+>>>  
+>>>  INSERT INTO employment VALUES 
+(3, 'Ryan Tweem', NULL, NULL, 'JavaScript', '2019-11-22', 95000.0, 2), 
+(3, 'Ryan Tweem', NULL, NULL, 'Python', '2019-11-22', 95000.0, 2);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (18.771 seconds)
+>>>  
+>>>  INSERT INTO employment VALUES 
+(4, 'Phil Leeson', NULL, NULL, NULL, '2020-02-15', 80000.0, NULL);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (15.928 seconds)
+>>>  
+>>>  INSERT INTO employment VALUES 
+(5, 'Jake Mgoy', 'Armadillo', 100.0, 'Python', '2018-08-30', 78000.0, 4), 
+(5, 'Jake Mgoy', 'Armadillo', 100.0, 'Java', '2018-08-30', 78000.0, 4);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (21.595 seconds)
+>>>  
+>>>  SELECT * FROM employment;
++-----------------------------+-----------------------+--------------------------+-------------------------------------+----------------------------------+-----------------------+--------------------+----------------------------------------+--+
+| employment.employee_number  | employment.full_name  | employment.project_name  | employment.percentage_contribution  | employment.programming_language  | employment.hire_date  | employment.salary  | employment.supervisor_employee_number  |
++-----------------------------+-----------------------+--------------------------+-------------------------------------+----------------------------------+-----------------------+--------------------+----------------------------------------+--+
+| 1                           | Dean Over a ton       | DigiWyse                 | 50.0                                | Python                           | 2015-06-01            | 90000.0            | 3                                      |
+| 1                           | Dean Over a ton       | DeepThought              | 100.0                               | Java                             | 2015-06-01            | 90000.0            | 3                                      |
+| 1                           | Dean Over a ton       | DeepThought              | 100.0                               | C++                              | 2015-06-01            | 90000.0            | 3                                      |
+| 2                           | Tanya Fly             | DigiWyse                 | 50.0                                | NULL                             | 2017-09-10            | 85000.0            | 1                                      |
+| 2                           | Tanya Fly             | Whitenight               | 100.0                               | NULL                             | 2017-09-10            | 85000.0            | 1                                      |
+| 3                           | Ryan Tweem            | NULL                     | NULL                                | JavaScript                       | 2019-11-22            | 95000.0            | 2                                      |
+| 3                           | Ryan Tweem            | NULL                     | NULL                                | Python                           | 2019-11-22            | 95000.0            | 2                                      |
+| 4                           | Phil Leeson           | NULL                     | NULL                                | NULL                             | 2020-02-15            | 80000.0            | NULL                                   |
+| 5                           | Jake Mgoy             | Armadillo                | 100.0                               | Python                           | 2018-08-30            | 78000.0            | 4                                      |
+| 5                           | Jake Mgoy             | Armadillo                | 100.0                               | Java                             | 2018-08-30            | 78000.0            | 4                                      |
++-----------------------------+-----------------------+--------------------------+-------------------------------------+----------------------------------+-----------------------+--------------------+----------------------------------------+--+
+10 rows selected (0.355 seconds)

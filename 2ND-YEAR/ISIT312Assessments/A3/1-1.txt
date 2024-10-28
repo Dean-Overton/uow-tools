@@ -1,0 +1,110 @@
+(1) 0.5 mark
+Implement the following query using GROUP BY clause with CUBE operator.
+For the order clerks (O_CLERK) Clerk#000000988, Clerk#000000992, find
+the total number of ordered parts per customer (O_CUSTKEY), per supplier
+(L_SUPPKEY), per customer and supplier (O_CUSTKEY, L_SUPPKEY), and the total
+number of ordered parts.
+
+SELECT
+    O_CUSTKEY,
+    L_SUPPKEY,
+    COUNT(*) AS TOTAL_ORDERED_PARTS
+FROM
+    ORDERS
+    JOIN LINEITEM ON ORDERS.O_ORDERKEY = LINEITEM.L_ORDERKEY
+WHERE
+    O_CLERK IN ('Clerk#000000988', 'Clerk#000000992')
+GROUP BY
+    O_CUSTKEY,
+    L_SUPPKEY
+ORDER BY
+    O_CUSTKEY,
+    L_SUPPKEY;
+
+(2) 0.5 mark
+Implement the following query using GROUP BY clause with ROLLUP operator.
+For the parts with the keys (L_PARTKEY) 18, 19,20 find the largest discount applied
+(L_DISCOUNT) per part key (L_PARTKEY) and per part key and supplier key
+(L_PARTKEY, L_SUPPKEY) and the largest discount applied at all.
+
+SELECT
+    L_PARTKEY,
+    L_SUPPKEY,
+    MAX(L_DISCOUNT) AS LARGEST_DISCOUNT
+FROM
+    LINEITEM
+WHERE
+    L_PARTKEY IN (18, 19, 20)
+GROUP BY
+    L_PARTKEY,
+    L_SUPPKEY
+ORDER BY
+    L_PARTKEY,
+    L_SUPPKEY;
+
+(3) 1 mark
+Implement the following query using GROUP BY clause with GROUPING SETS
+operator.
+Find the smallest price (L_EXTENDEDPRICE) per order year (O_ORDERDATE), and
+order clerk (O_CLERK).
+Implement the following SQL queries as SELECT statements using window partitioning
+technique.
+
+SELECT
+    O_ORDERDATE,
+    O_CLERK,
+    MIN(L_EXTENDEDPRICE) AS SMALLEST_PRICE
+FROM
+    ORDERS
+    JOIN LINEITEM ON ORDERS.O_ORDERKEY = LINEITEM.L_ORDERKEY
+GROUP BY
+    GROUPING SETS (
+        (O_ORDERDATE, O_CLERK),
+        (O_ORDERDATE),
+        (O_CLERK)
+    )
+ORDER BY
+    O_ORDERDATE,
+    O_CLERK;
+
+(4) 1 mark
+For each part list its key (PS_PARTKEY), all its available quantities (PS_AVAILQTY),
+the smallest available quantity, and the average available quantity. Consider only the
+parts with the keys 18, 19 and 20.
+
+SELECT
+    PS_PARTKEY,
+    PS_AVAILQTY,
+    MIN(PS_AVAILQTY) OVER (PARTITION BY PS_PARTKEY) AS SMALLEST_AVAILQTY,
+    AVG(PS_AVAILQTY) OVER (PARTITION BY PS_PARTKEY) AS AVERAGE_AVAILQTY
+FROM
+    PARTSUPP
+WHERE
+    PS_PARTKEY IN (18, 19, 20)
+ORDER BY
+    PS_PARTKEY,
+    PS_AVAILQTY;
+
+(5) 1 mark
+For each part list its key (PS_PARTKEY) and all its available quantities
+(PS_AVAILQTY) sorted in descending order and a rank (position number in an
+ascending order) of each quantity. Consider only the parts with the keys 18, 19 and
+20. Use an analytic function ROW_NUMBER().
+SELECT
+    PS_PARTKEY,
+    PS_AVAILQTY,
+    ROW_NUMBER() OVER (PARTITION BY PS_PARTKEY ORDER BY PS_AVAILQTY DESC) AS R
+FROM
+    PARTSUPP
+WHERE
+    PS_PARTKEY IN (18, 19, 20)
+ORDER BY
+    PS_PARTKEY,
+    PS_AVAILQTY DESC;
+
+(6) 1 mark
+For each part list its key (PS_PARTKEY), its available quantity, and an average
+available quantity (PS_AVAILQTY) of the current quantity and all previous quantities in
+the ascending order of available quantities. Consider only the parts with the keys 18,
+19 and 20. Use ROWS UNBOUNDED PRECEEDING sub-clause within PARTITION
+BY clause.

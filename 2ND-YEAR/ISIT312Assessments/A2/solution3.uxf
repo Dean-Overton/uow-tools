@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>312</y>
+      <w>144</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Enrolment
+--
+_Subject_ID FK PK_
+_Student_ID FK PK_
+_date PK_
+grade
+fee
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>496</x>
+      <y>320</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Student
+--
+_Student_ID PK_
+snum CK1
+School_ID FK
+first-name
+last-name</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>344</y>
+      <w>72</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;30.0;70.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>320</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Subject
+--
+_Subject_ID PK_
+code CK1
+Degree_ID FK
+title
+credits
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>352</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>90.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1072</x>
+      <y>320</y>
+      <w>112</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Degree
+--
+_Degree_ID PK_
+name CK1
+years</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1000</x>
+      <y>352</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>90.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>328</x>
+      <y>328</y>
+      <w>112</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>School
+--
+_School_ID PK_
+name CK1
+budget</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>352</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;30.0;80.0;30.0</additional_attributes>
+  </element>
+</diagram>
