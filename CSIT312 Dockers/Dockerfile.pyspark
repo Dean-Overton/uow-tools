@@ -1,0 +1,40 @@
+FROM openjdk:8-jdk-alpine
+
+ENV SPARK_VERSION=3.5.1 \
+    HADOOP_VERSION=3.3.6 \
+    PYSPARK_PYTHON=python3 \
+    PYSPARK_DRIVER_PYTHON=python3
+
+RUN apk add --no-cache \
+    bash \
+    curl \
+    python3 \
+    py3-pip \
+    nano
+
+RUN curl -O https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
+    mkdir -p /home/bigdata && \
+    tar -xzf hadoop-${HADOOP_VERSION}.tar.gz && \
+    mv hadoop-${HADOOP_VERSION} /home/bigdata && \
+    rm hadoop-${HADOOP_VERSION}.tar.gz
+
+RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz && \
+    tar -xzf spark-${SPARK_VERSION}-bin-hadoop3.tgz && \
+    mv spark-${SPARK_VERSION}-bin-hadoop3 /home/bigdata && \
+    rm spark-${SPARK_VERSION}-bin-hadoop3.tgz
+
+ENV HADOOP_HOME=/home/bigdata/hadoop-3.3.6 \
+    SPARK_HOME=/home/bigdata/spark-3.5.1-bin-hadoop3 \
+    HDFS_NAMENODE_USER=root \
+    HDFS_DATANODE_USER=root \
+    HDFS_SECONDARYNAMENODE_USER=root \
+    YARN_RESOURCEMANAGER_USER=root \
+    YARN_NODEMANAGER_USER=root \
+    PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SPARK_HOME/bin:$PATH
+
+RUN pip3 install pyspark
+
+COPY ./src /home/bigdata/src
+
+SHELL ["/bin/bash", "-c"]
+CMD ["bin/bash"]
